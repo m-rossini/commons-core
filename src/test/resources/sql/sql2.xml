@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<object class="org.apache.commons.dbcp.PoolableConnectionFactory" 
+        xmlns="http://apache.org/xml/xmlns/jakarta/commons/jocl">
+
+   <object class="br.com.auster.common.sql.SecureDriverManagerConnectionFactory">
+      <string value="jdbc:postgresql://jean:5432/testdb"/>
+      <string value="test"/>
+      <string value="/sql/password.bin"/>
+   </object>
+   
+   <!-- the next argument is the ObjectPool -->
+   <object class="org.apache.commons.pool.impl.GenericObjectPool">
+      <object class="org.apache.commons.pool.PoolableObjectFactory" null="true"/>
+      <int value="2"/> <!-- max active -->
+      <byte value="1"/> <!-- when exhausted action, 0 = fail, 1 = block, 2 = grow -->
+      <long value="2000"/> <!-- max wait -->
+      <int value="5"/> <!-- max idle -->
+      <boolean value="false"/> <!-- test on borrow -->
+      <boolean value="false"/> <!-- test on return -->
+      <long value="10000"/> <!-- time between eviction runs -->
+      <int value="5"/> <!-- number of connections to test per eviction run -->
+      <long value="5000"/> <!-- min evictable idle time -->
+      <boolean value="true"/> <!-- test while idle -->
+   </object>
+   <!-- the next argument is the KeyedObjectPoolFactory -->
+   <object class="org.apache.commons.pool.impl.StackKeyedObjectPoolFactory">
+      <int value="5"/> <!-- max idle -->
+   </object>
+   
+   <string value="SELECT 1"/> <!-- validation query -->
+   <boolean value="true"/> <!-- default read only -->
+   <boolean value="true"/> <!-- default auto commit -->
+</object>
